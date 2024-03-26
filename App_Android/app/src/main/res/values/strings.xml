@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">App1</string>
+    <string name="title_home">Главная</string>
+    <string name="title_dashboard">Вода</string>
+    <string name="title_notifications">Тренировка</string>
+    <string name="title_health">Привычки</string>
+    <string name="title_tasks">Задачи</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

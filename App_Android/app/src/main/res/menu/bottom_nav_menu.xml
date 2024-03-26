@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_tasks"
+        android:icon="@drawable/baseline_checklist_24"
+        android:title="@string/title_tasks" />
+    <item
+        android:id="@+id/navigation_health"
+        android:icon="@drawable/baseline_flatware_24"
+        android:title="@string/title_health" />
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/baseline_directions_run_24"
+        android:title="@string/title_notifications" />
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/baseline_water_drop_24"
+        android:title="@string/title_dashboard" />
+
+
+</menu>
