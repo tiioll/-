@@ -7,33 +7,32 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.app1.ui.home.HomeFragment"
+        android:name="com.example.app_android_2_version.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.app1.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
-
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.app1.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
-
-
-    <fragment
-        android:id="@+id/navigation_health"
-        android:name="com.example.app1.ui.health.HealthFragment"
-        android:label="@string/title_health"
-        tools:layout="@layout/fragment_health" />
+        android:id="@+id/navigation_waterdrop"
+        android:name="com.example.app_android_2_version.ui.watercontrol.WaterDropFragment"
+        android:label="@string/title_waterdrop"
+        tools:layout="@layout/fragment_water" />
 
     <fragment
         android:id="@+id/navigation_tasks"
-        android:name="com.example.app1.ui.tasks.TasksFragment"
-        android:label="@string/title_health"
-        tools:layout="@layout/fragment_health" />
+        android:name="com.example.app_android_2_version.ui.tasks.TasksFragment"
+        android:label="@string/title_tasks"
+        tools:layout="@layout/fragment_tasks" />
 
+    <fragment
+        android:id="@+id/navigation_training"
+        android:name="com.example.app_android_2_version.ui.trainings.TrainingFragment"
+        android:label="@string/title_trainings"
+        tools:layout="@layout/fragment_training" />
+
+
+    <fragment
+        android:id="@+id/navigation_habitat"
+        android:name="com.example.app_android_2_version.ui.habitats.HabitatFragment"
+        android:label="@string/title_habitat"
+        tools:layout="@layout/fragment_habitat" />
 </navigation>
