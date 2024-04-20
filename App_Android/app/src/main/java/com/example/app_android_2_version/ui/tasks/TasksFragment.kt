@@ -2,11 +2,10 @@ package com.example.app_android_2_version.ui.tasks
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.example.app_android_2_version.R
 
 

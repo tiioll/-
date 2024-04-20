@@ -4,24 +4,153 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
+    android:background="@color/purple_200"
     tools:context=".ui.home.HomeFragment">
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="284dp"
-        android:layout_height="84dp"
-        android:layout_marginStart="174dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="174dp"
-        android:onClick="registrationClick"
-        android:text="Создать аккаунт"
-        android:textAllCaps="false"
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="418dp"
+        android:layout_height="658dp"
+        android:layout_marginTop="90dp"
+        android:background="@drawable/rounded_corner"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.407" />
+        app:layout_constraintVertical_bias="0.235">
+
+        <LinearLayout
+            android:id="@+id/Linear1"
+            android:layout_width="130dp"
+            android:layout_height="112dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/profile_items"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="330dp">
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:text="Вес"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/Linear2"
+            android:layout_width="130dp"
+            android:layout_height="112dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="145dp"
+
+            android:background="@drawable/profile_items"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="330dp">
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:text="Рост"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/Linear3"
+            android:layout_width="130dp"
+            android:layout_height="112dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="280dp"
+            android:background="@drawable/profile_items"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="330dp">
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center"
+                android:text="Возраст"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="396dp"
+            android:layout_height="119dp"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="140dp"
+            android:background="@drawable/profile_items"
+            android:orientation="vertical" />
+
+        <TextView
+
+            android:id="@+id/name_1"
+            android:layout_width="60dp"
+            android:layout_height="33dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="Name"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+
+        <TextView
+
+            android:id="@+id/surname_1"
+            android:layout_width="60dp"
+            android:layout_height="33dp"
+            android:layout_marginLeft="110dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="SurName"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/changeprofile"
+            android:layout_width="140dp"
+            android:layout_height="35dp"
+            android:layout_gravity="right"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="20dp"
+            android:backgroundTint="@color/light_gray"
+            android:gravity="center"
+            android:text="Изменить"
+            android:textAllCaps="false"
+            android:textColor="@color/purple_200"
+            android:textSize="10dp" />
+
+    </FrameLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/homePicture"
+        android:layout_width="90dp"
+        android:layout_height="88dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:padding="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/circular"
+        app:strokeColor="@color/black"
+        android:src="@drawable/baseline_person_24"
+        app:strokeWidth="5dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

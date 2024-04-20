@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "678962317655",
+    "project_id": "healthproject-cdaf3",
+    "storage_bucket": "healthproject-cdaf3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678962317655:android:e37fd14b09cca4a28e5612",
+        "android_client_info": {
+          "package_name": "com.example.app_android_2_version"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDbnccGgsPuo36fCHMwhpKy1zOJttdtKw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
