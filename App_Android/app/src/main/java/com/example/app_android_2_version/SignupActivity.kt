@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.example.app_android_2_version.databinding.ActivitySignupBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -45,6 +46,10 @@ class SignupActivity : AppCompatActivity() {
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
+                            val tasks = hashMapOf(
+                                "tasks" to null
+                            )
+
                             val userInfo = hashMapOf(
                                 "email" to email,
                                 "username" to username,
@@ -54,6 +59,7 @@ class SignupActivity : AppCompatActivity() {
                                 "surname" to "",
                                 "age" to 0,
                                 "gender" to "",
+                                "tasks" to tasks
                             )
 
                             val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid

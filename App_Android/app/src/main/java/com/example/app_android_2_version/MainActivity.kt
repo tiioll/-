@@ -48,12 +48,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-    fun onButtonclick(view: View)
-    {
-        Toast.makeText(this, "TaskButton", Toast.LENGTH_SHORT).show()
-    }
-
     fun onButtonclick2(view: View)
     {
         Toast.makeText(this, "HabitatButton", Toast.LENGTH_SHORT).show()

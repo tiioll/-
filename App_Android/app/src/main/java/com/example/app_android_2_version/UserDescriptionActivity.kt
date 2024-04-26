@@ -87,34 +87,32 @@ class UserDescriptionActivity : AppCompatActivity() {
 
     private fun loadUserInfo() {
         val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
-        currentUserUid?.let { uid ->
-            FirebaseDatabase.getInstance().getReference("users").child(uid)
-                .addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        val username = snapshot.child("username").getValue(String::class.java)
-                        val profileImage = snapshot.child("profileImage").getValue(String::class.java)
-                        val name = snapshot.child("name").getValue(String::class.java)
-                        val surname = snapshot.child("surname").getValue(String::class.java)
-                        val email = snapshot.child("email").getValue(String::class.java)
-                        binding.nameVvod.setText(name)
-                        binding.surnameVvod.setText(surname)
-                        binding.emailVvod.setText(email)
+        currentUserUid?.let { uid -> FirebaseDatabase.getInstance().getReference("users").child(uid).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val username = snapshot.child("username").getValue(String::class.java)
+                val profileImage = snapshot.child("profileImage").getValue(String::class.java)
+                val name = snapshot.child("name").getValue(String::class.java)
+                val surname = snapshot.child("surname").getValue(String::class.java)
+                val email = snapshot.child("email").getValue(String::class.java)
+                binding.nameVvod.setText(name)
+                binding.surnameVvod.setText(surname)
+                binding.emailVvod.setText(email)
 
 
 
 
 
-                        profileImage?.let {
-                            if (it.isNotEmpty()) {
-                                Glide.with(this@UserDescriptionActivity).load(it).into(binding.imageView3)
-                            }
-                        }
+                profileImage?.let {
+                    if (it.isNotEmpty()) {
+                        Glide.with(this@UserDescriptionActivity).load(it).into(binding.imageView3)
                     }
+                }
+            }
 
-                    override fun onCancelled(error: DatabaseError) {
-                        // Обработка ошибки
-                    }
-                })
+            override fun onCancelled(error: DatabaseError) {
+                // Обработка ошибки
+            }
+        })
         }
     }
 
