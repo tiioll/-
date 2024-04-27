@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".SignupActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="80sp"
+        android:fontFamily="@font/inter_bold"
+        android:text="Вход в аккаунт"
+        android:textColor="@color/black"
+        android:textSize="25sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30sp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:fontFamily="@font/inter_bold"
+        android:text="Email:"
+        />
+
+    <EditText
+        android:id="@+id/username2"
+        android:layout_width="265dp"
+        android:layout_height="61dp"
+        android:layout_gravity="center"
+        android:background="@drawable/common_rounding"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="text"
+        android:text=""
+        android:textColorHint="@color/blue" />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20sp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:fontFamily="@font/inter_bold"
+        android:text="Пароль:"
+        />
+
+    <EditText
+        android:id="@+id/password2"
+        android:layout_width="265dp"
+        android:layout_height="61dp"
+        android:layout_gravity="center"
+        android:background="@drawable/common_rounding"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="text"
+        android:text="" />
+
+
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="289dp"
+        android:layout_gravity="center"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:text="Войти" />
+
+
+    <TextView
+        android:id="@+id/notregistered"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:layout_marginTop="30dp"
+        android:textSize="20dp"
+        android:textColor="@color/purple_200"
+        android:gravity="center"
+        android:text="Зарегистрироваться" />
+
+</LinearLayout>

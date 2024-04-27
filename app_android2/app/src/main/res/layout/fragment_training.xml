@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.trainings.TrainingFragment">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="174dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="174dp"
+        android:fontFamily="@font/jost_bold"
+        android:text="Активность"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/today"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="61dp"
+
+        android:text="Сегодня"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/week"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/week"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="172dp"
+        android:text="Неделя"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.968"
+        app:layout_constraintStart_toEndOf="@+id/today"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+
+    <TextView
+        android:id="@+id/month2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="44dp"
+        android:text="Месяц"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.973"
+        app:layout_constraintStart_toEndOf="@+id/week"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+
+    <FrameLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="180dp"
+        android:layout_height="146dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="3dp"
+
+        android:background="@drawable/profile_items"
+        android:backgroundTint="@color/light_gray"
+        android:orientation="vertical"
+        android:outlineProvider="bounds"
+        app:layout_constraintEnd_toStartOf="@+id/frameLayout3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/week">
+
+
+        <TextView
+            android:id="@+id/steps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jost_bold"
+            android:gravity="center"
+            android:text="Шаги"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/step_test"
+            android:layout_width="85dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/purple_200"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+
+            android:id="@+id/progressBar"
+            android:layout_width="90dp"
+            android:layout_height="118dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:alpha="0.20"
+            app:cpb_background_progressbar_color="@color/sky"
+            app:cpb_background_progressbar_width="6dp"
+            app:cpb_progress_max="10000"
+            app:cpb_progressbar_color="@color/purple_200" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout3"
+        android:layout_width="180dp"
+        android:layout_height="146dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/profile_items"
+        android:backgroundTint="@color/light_gray"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/frameLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/week">
+
+
+        <TextView
+            android:id="@+id/training"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jost_bold"
+            android:gravity="center"
+            android:text="Тренировки"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:id="@+id/frameLayout4"
+        android:layout_width="179dp"
+        android:layout_height="134dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/profile_items"
+        android:backgroundTint="@color/light_gray"
+
+        android:elevation="8dp"
+        android:outlineProvider="bounds"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout2">
+
+
+        <TextView
+            android:id="@+id/cardio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jost_bold"
+            android:gravity="center"
+            android:text="Кардио"
+            android:textColor="@color/purple_200"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:layout_width="179dp"
+            android:layout_height="85dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/curve_cardio" />
+
+        <ImageView
+            android:layout_width="133dp"
+            android:layout_height="109dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/girl_cardio" />
+
+
+    </FrameLayout>
+
+    <FrameLayout
+
+        android:id="@+id/frameLayout6"
+        android:layout_width="179dp"
+        android:layout_height="134dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="14dp"
+        android:background="@drawable/profile_items"
+        android:backgroundTint="@color/light_gray"
+        android:elevation="8dp"
+        android:outlineProvider="bounds"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout3">
+
+
+        <TextView
+            android:id="@+id/strength"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jost_bold"
+            android:gravity="center"
+            android:text="Силовая"
+            android:textColor="@color/purple_200"
+            android:textSize="22sp" />
+
+
+        <ImageView
+            android:layout_width="179dp"
+            android:layout_height="85dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/curve_strength" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="134dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@drawable/girl_strength" />
+
+
+    </FrameLayout>
+
+    <FrameLayout
+
+        android:id="@+id/frameLayout5"
+        android:layout_width="380dp"
+        android:layout_height="86dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="93dp"
+        android:background="@drawable/profile_items"
+        android:backgroundTint="@color/light_gray"
+
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout4">
+
+        <TextView
+            android:id="@+id/yoga"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/jost_bold"
+            android:text="Йога"
+            android:textColor="@color/purple_200"
+            android:textSize="28sp" />
+
+        <ImageView
+            android:layout_width="226dp"
+            android:layout_height="match_parent"
+
+            android:layout_gravity="right"
+            android:scaleType="centerCrop"
+            android:src="@drawable/carve_yoga" />
+
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="228dp"
+        android:layout_height="96dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="79dp"
+        android:src="@drawable/girl_yoga"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/frameLayout4"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout6" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="112dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="25dp"
+        android:text="Добрый день,"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/FirstandLast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="49dp"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
