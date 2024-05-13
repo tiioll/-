@@ -1,26 +1,31 @@
 package com.example.app_android_2_version.ui.tasks
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.view.ViewParent
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.app_android_2_version.databinding.TaskListItemBinding
-import com.google.android.gms.tasks.Task
 
-class TaskAdapter(val listener: Listener) : ListAdapter<Taska, TaskAdapter.ItemHplder>(ItemComporator()) {
+class TaskAdapter(val listener: TasksFragment) : ListAdapter<Taska, TaskAdapter.ItemHplder>(ItemComporator()) {
 
     class ItemHplder(private val binding: TaskListItemBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(taska: Taska, listener: Listener) = with(binding){
+
             taskListItemTask.text = taska.task
-            taskListItemDate.text = taska.date
-            taskListItemWeekday.text = taska.weekDay
 
-            val buttonTaskDelete = taskDelete
-
-            buttonTaskDelete.setOnClickListener{
-                listener.onClick(taska)
+            if (taska.done){
+                taskWasDone.setOnClickListener{
+                    listener.onClick(taska)
+                }
+                taskDone.visibility = View.INVISIBLE
+            }
+            else {
+                taskDone.setOnClickListener{
+                    listener.onClick(taska)
+                }
+                taskDone.visibility = View.VISIBLE
             }
         }
 

@@ -1,7 +1,7 @@
 package com.example.app_android_2_version.ui.tasks
 
 
-import android.app.DatePickerDialog
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,16 +18,14 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 
 class TasksFragment : Fragment(), TaskAdapter.Listener, TaskCalendarAdapter.Listener {
 
     private var _binding: FragmentTasksBinding? = null
     private val binding get() = _binding!!
-    private lateinit var firebaseAuth: FirebaseAuth
 
     private var Task: String = ""
     private lateinit var adapter: TaskAdapter
@@ -35,11 +33,14 @@ class TasksFragment : Fragment(), TaskAdapter.Listener, TaskCalendarAdapter.List
     private lateinit var TaskDate: String
 
     val database = Firebase.database
+    var auth = FirebaseAuth.getInstance()
     val myRef = database.getReference("tasks")
 
     var ActiveYear: Int = 2024
     var ActiveMonth: Int = 1
     var ActiveDay: Int = 1
+
+    lateinit var SelectedDay: Day
 
     var Months = listOf(
         "Январь",
@@ -65,19 +66,31 @@ class TasksFragment : Fragment(), TaskAdapter.Listener, TaskCalendarAdapter.List
         _binding = FragmentTasksBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        val formatter = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            DateTimeFormatter.ofPattern("dd.MM.yyyy")
+        } else {
+            TODO("VERSION.SDK_INT < O")
+        }
+
+        var nowDate: String = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            LocalDate.now().format(formatter)
+        } else {
+            TODO("VERSION.SDK_INT < O")
+        }
+
+        ActiveDay = (nowDate[0].toString() + nowDate[1].toString()).toInt()
+        ActiveMonth = (nowDate[3].toString() + nowDate[4].toString()).toInt()
+        ActiveYear = (nowDate[6].toString() + nowDate[7].toString() + nowDate[8].toString() + nowDate[9].toString()).toInt()
+
         binding.monthChange.text = Months.get(ActiveMonth - 1)
         binding.yearChange.text = ActiveYear.toString()
 
-        val calendar = Calendar.getInstance()
+        //Настройка списков и бд
 
-        //Настройка списка
         onChangeListener(myRef)
         initRcView()
         initCalendarRcView()
         updateCalendar()
-
-
-        //qweqwe@gmail.com
 
         binding.yearChangeLeft.setOnClickListener {
             ActiveYear -= 1
@@ -116,29 +129,6 @@ class TasksFragment : Fragment(), TaskAdapter.Listener, TaskCalendarAdapter.List
             updateCalendar()
         }
 
-        val datePicker = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-            calendar.set(Calendar.YEAR, year)
-            calendar.set(Calendar.MONTH, month)
-            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-            updateLable(calendar)
-        }
-
-        //Выбор даты при клике на календарь
-        binding.tasksSetDate.setOnClickListener {
-            TaskDate = ""
-            if (binding.tasksNewtask.getText().toString().trim() != "") {
-                DatePickerDialog(
-                    requireContext(),
-                    datePicker,
-                    calendar.get(Calendar.YEAR),
-                    calendar.get(Calendar.MONTH),
-                    calendar.get(Calendar.DAY_OF_MONTH)
-                ).show()
-            } else {
-                Toast.makeText(requireContext(), "Сначала введите задачу", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        }
 
         //Добавление задачи по клику
         binding.tasksCreateTask.setOnClickListener {
@@ -157,13 +147,29 @@ class TasksFragment : Fragment(), TaskAdapter.Listener, TaskCalendarAdapter.List
                 ).show()
             }
 
+            var d: String
+            var m: String
+            var y = ActiveYear
+
+            if (ActiveDay < 10) {
+                d = "0" + ActiveDay.toString()
+            } else {
+                d = ActiveDay.toString()
+            }
+            if (ActiveMonth < 10) {
+                m = "0" + ActiveMonth.toString()
+            } else {
+                m = ActiveMonth.toString()
+            }
+            TaskDate = d + "." + m + "." + y
+
             if (Task != "" && TaskIsOnly(myRef)) {
                 val currentUser = FirebaseAuth.getInstance().currentUser
                 currentUser?.uid?.let { uid ->
                     val userReference =
                         FirebaseDatabase.getInstance().getReference("users").child(uid)
                     userReference.child("tasks").child(Task)
-                        .setValue(Taska(Task, TaskDate, GetWeekDay(TaskDate)))
+                        .setValue(Taska(Task, TaskDate))
                 }
 
                 updateCalendar()
@@ -210,24 +216,46 @@ class TasksFragment : Fragment(), TaskAdapter.Listener, TaskCalendarAdapter.List
     }
 
     override fun onClick(taska: Taska) {
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        currentUser?.uid?.let { uid ->
+        //Удаление элемента:
+        val currentUserDel = FirebaseAuth.getInstance().currentUser
+        currentUserDel?.uid?.let { uid ->
             val userReference = FirebaseDatabase.getInstance().getReference("users").child(uid)
-            taska.task?.let { userReference.child("tasks").child(it).removeValue() }
+            taska.task?.let { userReference.child("tasks").child(taska.task!!).removeValue() }
         }
 
-        updateCalendar()
-        Toast.makeText(
-            requireContext(),
-            "Задача " + Task + ", установленная до " + taska.date + " удалена",
-            Toast.LENGTH_SHORT
-        ).show()
+        if (!taska.done){
+            taska.done = true
+
+            Toast.makeText(
+                requireContext(),
+                "Задача " + taska.task + " выполнена",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+        else{
+            taska.done = false
+        }
+
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        currentUser?.uid?.let { uid ->
+            val userReference =
+                FirebaseDatabase.getInstance().getReference("users").child(uid)
+            taska.task?.let {
+                userReference.child("tasks").child(it)
+                    .setValue(Taska(taska.task, taska.date, taska.done))
+            }
+        }
+
+        onChangeListener(myRef)
     }
 
     override fun onClick(day: Day) {
+        SelectedDay.active = false
+        SelectedDay = day
         ActiveDay = day.date?.toInt()!!
-
-        updateCalendar()
+        day.active = true
+        CalendarAdapter.notifyDataSetChanged()
+        onChangeListener(myRef)
     }
 
     private fun updateCalendar() {
@@ -263,7 +291,12 @@ class TasksFragment : Fragment(), TaskAdapter.Listener, TaskCalendarAdapter.List
             }
             var date: String = d + "." + m + "." + y
 
-            list.add(Day((i).toString(), GetWeekDay(date), active))
+            var day = Day((i).toString(), GetWeekDay(date), active)
+
+            list.add(day)
+
+            if (active)
+                SelectedDay = day
         }
         CalendarAdapter.submitList(list)
         onChangeListener(myRef)
@@ -306,24 +339,25 @@ class TasksFragment : Fragment(), TaskAdapter.Listener, TaskCalendarAdapter.List
                     override fun onDataChange(snapshot: DataSnapshot) {
                         val list = ArrayList<Taska>()
                         var snap = snapshot.child("tasks")
+
+                        var d: String
+                        var m: String
+                        var y = ActiveYear
+
+                        if (ActiveDay < 10) {
+                            d = "0" + ActiveDay.toString()
+                        } else {
+                            d = ActiveDay.toString()
+                        }
+                        if (ActiveMonth < 10) {
+                            m = "0" + ActiveMonth.toString()
+                        } else {
+                            m = ActiveMonth.toString()
+                        }
+                        var activeDate = d + "." + m + "." + y
+
                         for (s in snap.children) {
                             val taska = s.getValue(Taska::class.java)
-
-                            var d: String
-                            var m: String
-                            var y = ActiveYear
-
-                            if (ActiveDay < 10) {
-                                d = "0" + ActiveDay.toString()
-                            } else {
-                                d = ActiveDay.toString()
-                            }
-                            if (ActiveMonth < 10) {
-                                m = "0" + ActiveMonth.toString()
-                            } else {
-                                m = ActiveMonth.toString()
-                            }
-                            var activeDate = d + "." + m + "." + y
 
                             if (taska != null && (taska.date?.let {
                                     dateCompare(
@@ -331,7 +365,10 @@ class TasksFragment : Fragment(), TaskAdapter.Listener, TaskCalendarAdapter.List
                                         activeDate
                                     )
                                 } == 0)) {
-                                list.add(taska)
+                                if (taska.done)
+                                    list.add(taska)
+                                else
+                                    list.add(0, taska)
                             }
                         }
                         adapter.notifyDataSetChanged()
@@ -375,11 +412,5 @@ class TasksFragment : Fragment(), TaskAdapter.Listener, TaskCalendarAdapter.List
             return 1
         else
             return 0
-    }
-
-    private fun updateLable(calendar: Calendar) {
-        val format = "dd.MM.yyyy"
-        val sdf = SimpleDateFormat(format, Locale.UK)
-        TaskDate = sdf.format(calendar.time).toString()
     }
 }

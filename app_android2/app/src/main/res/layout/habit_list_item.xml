@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="5dp">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/list_item"
-        android:backgroundTint="@color/purple_200"
-        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,47 +21,50 @@
             android:background="@drawable/list_item"
             android:orientation="horizontal"
             android:padding="5dp"
-            android:paddingStart="10dp"
+            android:paddingStart="20dp"
             android:paddingEnd="10dp">
 
             <TextView
-                android:id="@+id/task_list_item_task"
-                android:layout_width="259dp"
+                android:id="@+id/habit_list_item_habit"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/jost"
-                android:text="Задача"
+                android:text="Привычка"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="20sp" />
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/set_done"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:cardElevation="0dp">
+                app:contentPaddingTop="4dp">
 
                 <TextView
-                    android:id="@+id/task_was_done"
+                    android:id="@+id/habit_was_done"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/edittext_design"
                     android:fontFamily="@font/jost"
                     android:text="Выполнено"
                     android:textAlignment="center"
                     android:textColor="@color/yogurt_purple"
+                    android:textSize="16sp"
                     android:visibility="visible" />
 
                 <TextView
-                    android:id="@+id/task_done"
+                    android:id="@+id/habit_done"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/edittext_design"
                     android:fontFamily="@font/jost"
                     android:text="Выполнить"
                     android:textAlignment="center"
                     android:textColor="@color/purple_200"
+                    android:textSize="16sp"
                     android:visibility="visible" />
 
             </androidx.cardview.widget.CardView>

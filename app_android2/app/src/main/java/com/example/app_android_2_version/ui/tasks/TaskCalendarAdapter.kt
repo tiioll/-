@@ -20,8 +20,8 @@ class TaskCalendarAdapter(val listener: Listener) : ListAdapter<Day, TaskCalenda
                 cardViewDay.visibility = View.INVISIBLE
                 cardViewActiveDay.visibility = View.VISIBLE
 
-                dayListItemActiveDay.text = day.date.toString()
                 dayListItemWeekDay.text = day.weekDay
+                dayListItemActiveDay.text = day.date.toString()
 
                 cardViewActiveDay.setOnClickListener{
                     listener.onClick(day)
@@ -38,7 +38,7 @@ class TaskCalendarAdapter(val listener: Listener) : ListAdapter<Day, TaskCalenda
                 }
             }
 
-            day.active = false
+
         }
 
         companion object{
