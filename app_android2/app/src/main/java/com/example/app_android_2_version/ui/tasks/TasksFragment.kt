@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.app_android_2_version.databinding.FragmentTasksBinding
+import com.example.app_android_2_version.ui.home.Notification
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -178,6 +179,17 @@ class TasksFragment : Fragment(), TaskAdapter.Listener, TaskCalendarAdapter.List
                     "Задача " + Task + " установлена до " + TaskDate,
                     Toast.LENGTH_SHORT
                 ).show()
+
+
+                // Создание уведомлений
+                val notificationText = Task
+                val currentUserForNotification = FirebaseAuth.getInstance().currentUser
+                currentUserForNotification?.uid?.let { uid ->
+                    val userReference =
+                        FirebaseDatabase.getInstance().getReference("users").child(uid)
+                    userReference.child("notifications").child(notificationText)
+                        .setValue(Notification(notificationText, TaskDate, "12:00"))
+                }
             }
         }
 

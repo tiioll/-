@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.app_android_2_version.UserDescriptionActivity
+import com.example.app_android_2_version.NotificationsActivity
 import com.example.app_android_2_version.databinding.FragmentHomeBinding
 
 
@@ -55,14 +56,16 @@ class HomeFragment : Fragment() {
             startActivityForResult(intent, 100)
         }
 
+        binding.openNotifications.setOnClickListener {
+            val intent = Intent(activity, NotificationsActivity::class.java)
+            startActivityForResult(intent, 100)
+        }
+
         return root
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }

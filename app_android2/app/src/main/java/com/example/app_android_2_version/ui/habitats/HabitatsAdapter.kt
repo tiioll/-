@@ -15,7 +15,7 @@ class HabitatsAdapter(val listener: HabitatFragment) : ListAdapter<Habit, Habita
         fun bind(habit: Habit, listener: Listener) = with(binding){
             habitListItemHabit.text = habit.habit
 
-            if (habit.done){
+            if (habit.doneList[habit.activeDay!!]){
                 habitDone.visibility = View.INVISIBLE
 
                 setDone.setOnClickListener{

@@ -192,11 +192,12 @@
             android:background="@drawable/light_gray_rounding"
             android:orientation="vertical">
 
-            <ImageView
+            <Button
+                android:id="@+id/open_notifications"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="right"
-                android:src="@drawable/baseline_notifications_none_24" />
+                android:background="@drawable/baseline_notifications_none_24" />
         </LinearLayout>
 
     </FrameLayout>

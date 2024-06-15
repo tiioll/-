@@ -10,7 +10,6 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.app_android_2_version.databinding.FragmentHabitatBinding
-import com.example.app_android_2_version.ui.tasks.Taska
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -22,7 +21,7 @@ import com.google.firebase.database.database
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class HabitatFragment : Fragment(), HabitatsAdapter.Listener {
+class HabitatFragment : Fragment(), HabitatsAdapter.Listener, WeekDayAdapter.Listener {
 
     private var _binding: FragmentHabitatBinding? = null
     private val binding get() = _binding!!
@@ -48,7 +47,6 @@ class HabitatFragment : Fragment(), HabitatsAdapter.Listener {
     var daysOfWeek = listOf("Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс")
     var ActiveWeekDay: Int = daysOfWeek.indexOf(GetWeekDay(NowDay))
     var HabitName: String = ""
-
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -93,7 +91,7 @@ class HabitatFragment : Fragment(), HabitatsAdapter.Listener {
                     val userReference =
                         FirebaseDatabase.getInstance().getReference("users").child(uid)
                     userReference.child("habitats").child(HabitName)
-                        .setValue(Habit(HabitName))
+                        .setValue(Habit(HabitName, ActiveWeekDay))
                 }
 
                 updateCalendar()
@@ -106,16 +104,15 @@ class HabitatFragment : Fragment(), HabitatsAdapter.Listener {
             }
         }
 
-
         return root
     }
 
-    /*
+
     override fun onClick(weekDay: WeekDay) {
         ActiveWeekDay = weekDay.weekDayNumber!!
         updateCalendar()
     }
-     */
+
 
     override fun onClick(habit: Habit) {
         if (daysOfWeek.indexOf(GetWeekDay(NowDay)) != ActiveWeekDay){
@@ -144,10 +141,8 @@ class HabitatFragment : Fragment(), HabitatsAdapter.Listener {
                 }
             }
 
-            if (habit.done)
-                habit.done = false
-            else
-                habit.done = true
+            if (ActiveWeekDay == daysOfWeek.indexOf(GetWeekDay(NowDay)))
+                habit.doneList[ActiveWeekDay] = !habit.doneList[ActiveWeekDay]
 
             val currentUser = FirebaseAuth.getInstance().currentUser
             currentUser?.uid?.let { uid ->
@@ -155,7 +150,7 @@ class HabitatFragment : Fragment(), HabitatsAdapter.Listener {
                     FirebaseDatabase.getInstance().getReference("users").child(uid)
                 habit.habit?.let {
                     userReference.child("habitats").child(it)
-                        .setValue(Habit(habit.habit, habit.done))
+                        .setValue(Habit(habit.habit, ActiveWeekDay, habit.doneList))
                 }
             }
 
@@ -204,9 +199,12 @@ class HabitatFragment : Fragment(), HabitatsAdapter.Listener {
 
                         for (s in snap.children) {
                             val habit = s.getValue(Habit::class.java)
+                            if (habit != null) {
+                                habit.activeDay = ActiveWeekDay
+                            }
 
                             if (habit != null) {
-                                if (habit.done)
+                                if (habit.doneList[ActiveWeekDay])
                                     list.add(habit)
                                 else
                                     list.add(0, habit)
@@ -232,6 +230,7 @@ class HabitatFragment : Fragment(), HabitatsAdapter.Listener {
             list.add(WeekDay((i == ActiveWeekDay), (i < ActiveWeekDay), i, daysOfWeek[i]))
         }
         weekDayAdapter.submitList(list)
+        onChangeListener(myRef)
     }
 
 
@@ -253,7 +252,7 @@ class HabitatFragment : Fragment(), HabitatsAdapter.Listener {
     }
 
     private fun initWeekRcView() = with(binding) {
-        weekDayAdapter = WeekDayAdapter()
+        weekDayAdapter = WeekDayAdapter(this@HabitatFragment)
         weekDays.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         weekDays.adapter = weekDayAdapter

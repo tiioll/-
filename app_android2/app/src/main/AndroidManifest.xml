@@ -30,6 +30,9 @@
             android:name=".UserDescriptionActivity"
             android:exported="false" />
         <activity
+            android:name=".NotificationsActivity"
+            android:exported="false" />
+        <activity
             android:name=".SignInActivity"
             android:exported="true"
             android:theme="@style/Theme.Appandroid2version"></activity>

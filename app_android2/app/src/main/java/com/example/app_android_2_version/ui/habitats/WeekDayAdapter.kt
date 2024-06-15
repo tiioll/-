@@ -1,26 +1,22 @@
 package com.example.app_android_2_version.ui.habitats
 
 import android.annotation.SuppressLint
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.app_android_2_version.databinding.WeekDayItemBinding
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
-class WeekDayAdapter() : ListAdapter<WeekDay, WeekDayAdapter.ItemHplder>(DayComporator()) {
+class WeekDayAdapter(val listener: HabitatFragment) : ListAdapter<WeekDay, WeekDayAdapter.ItemHplder>(DayComporator()) {
+
     class ItemHplder(private val binding: WeekDayItemBinding) : RecyclerView.ViewHolder(binding.root){
+        fun bind(weekDay: WeekDay, listener: Listener) = with(binding){
 
-        fun bind(day: WeekDay) = with(binding){
+            weekDayListItemWeekDay.text = weekDay.weekDayName
 
-            weekDayListItemWeekDay.text = day.weekDayName
-
-            if (day.active){
+            if (weekDay.active){
                 weekDayActive.visibility = View.VISIBLE
                 weekDayDone.visibility = View.INVISIBLE
 
@@ -29,13 +25,17 @@ class WeekDayAdapter() : ListAdapter<WeekDay, WeekDayAdapter.ItemHplder>(DayComp
             else{
                 weekDayActive.visibility = View.INVISIBLE
 
-                if (day.past){
+                if (weekDay.past){
                     weekDayDone.visibility = View.VISIBLE
                 }
                 else
                     weekDayDone.visibility = View.INVISIBLE
 
 
+            }
+
+            cardViewWeekDayItem.setOnClickListener{
+                listener.onClick(weekDay)
             }
         }
 
@@ -47,14 +47,16 @@ class WeekDayAdapter() : ListAdapter<WeekDay, WeekDayAdapter.ItemHplder>(DayComp
         }
     }
 
-
+    interface Listener{
+        fun onClick(weekDay: WeekDay)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHplder {
         return ItemHplder.create(parent)
     }
 
     override fun onBindViewHolder(holder: ItemHplder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), listener)
     }
 }
 
