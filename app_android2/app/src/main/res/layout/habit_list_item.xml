@@ -39,6 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                app:cardElevation="0dp"
                 app:contentPaddingTop="4dp">
 
                 <TextView
@@ -47,6 +48,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/edittext_design"
+                    android:elevation="0dp"
                     android:fontFamily="@font/jost"
                     android:text="Выполнено"
                     android:textAlignment="center"
@@ -60,6 +62,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/edittext_design"
+                    android:elevation="0dp"
                     android:fontFamily="@font/jost"
                     android:text="Выполнить"
                     android:textAlignment="center"
@@ -68,6 +71,14 @@
                     android:visibility="visible" />
 
             </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/habit_del"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@android:drawable/ic_menu_delete"
+                android:elevation="0dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

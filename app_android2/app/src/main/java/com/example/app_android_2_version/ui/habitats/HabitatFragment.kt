@@ -69,7 +69,7 @@ class HabitatFragment : Fragment(), HabitatsAdapter.Listener, WeekDayAdapter.Lis
             HabitName = binding.habitat5.getText().toString().trim()
 
 
-            if (HabitName == null)
+            if (HabitName == "")
                 Toast.makeText(
                     requireContext(),
                     "Сначала введите привычку",
@@ -140,6 +140,12 @@ class HabitatFragment : Fragment(), HabitatsAdapter.Listener, WeekDayAdapter.Lis
                     userReference.child("habitats").child(habit.habit!!).removeValue()
                 }
             }
+
+            if (habit.delete){
+                onChangeListener(myRef)
+                return
+            }
+
 
             if (ActiveWeekDay == daysOfWeek.indexOf(GetWeekDay(NowDay)))
                 habit.doneList[ActiveWeekDay] = !habit.doneList[ActiveWeekDay]
